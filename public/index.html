@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulsar Web Proxy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0e0e1a; /* Dark blue */
+            color: #c0c0c0; /* Light grey */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #001f4d; /* Navy blue */
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .navbar a {
+            color: #c0c0c0;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .box {
+            background-color: #1a1a1a; /* Dark grey */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #f0f0f0; /* White */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #333; /* Dark grey */
+            color: #c0c0c0;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: linear-gradient(45deg, #003366, #006699); /* Gradient from dark to light blue */
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+        button:hover {
+            background: linear-gradient(45deg, #006699, #003366);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        }
+        footer {
+            background-color: #001f4d;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+        footer a {
+            color: #c0c0c0;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .settings {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1a1a1a; /* Dark grey */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+        .settings h2 {
+            margin-top: 0;
+            color: #f0f0f0; /* White */
+        }
+        .settings-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #c0c0c0;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="#">Features</a>
+        <a href="#" onclick="openSettings()">Settings</a>
+    </div>
+    <div class="container">
+        <div class="box">
+            <h1>Pulsar Web Proxy</h1>
+            <form action="/proxy" method="GET">
+                <input type="text" name="url" placeholder="Enter URL" required>
+                <button type="submit">Launch</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <p>Powered by Ultraviolet v3.0+</p>
+        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+    </footer>
+    <div class="overlay" id="overlay" onclick="closeSettings()"></div>
+    <div class="settings" id="settings">
+        <button class="settings-close" onclick="closeSettings()">✖</button>
+        <h2>Settings</h2>
+        <p>Configure your proxy settings here.</p>
+        <!-- Add your settings form elements here -->
+    </div>
+    <script>
+        function openSettings() {
+            document.getElementById('settings').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+        function closeSettings() {
+            document.getElementById('settings').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "proxathon-wtv-u-want-to-name-it",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@mercuryworkshop/bare-mux": "^1.1.0",
+    "@mercuryworkshop/epoxy-transport": "^1.1.0",
+    "@titaniumnetwork-dev/ultraviolet": "^3.1.2",
+    "chalk": "^5.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "wisp-server-node": "^1.1.0"
+  }
+}
