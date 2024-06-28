@@ -2,11 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pulsar Web Proxy</title>
+    <meta name="description" content="Pulsar: Your free, fast, and secure web proxy solution.">
+    <meta name="keywords" content="proxy, web proxy, pulsar, unblock websites, free web proxy, proxy server">
+    <meta name="theme-color" content="#222831">
+    <meta name="googlebot" content="index, follow, snippet">
+    <meta name="robots" content="index, follow">
+    <title>Pulsar - Free Frontend Proxy</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: #0e0e1a; /* Dark blue */
             color: #c0c0c0; /* Light grey */
             margin: 0;
@@ -14,69 +25,73 @@
             flex-direction: column;
             min-height: 100vh;
         }
-        .navbar {
+        header {
             background-color: #001f4d; /* Navy blue */
             padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        .navbar a {
-            color: #c0c0c0;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-        }
-        .container {
-            flex: 1;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start; /* Align items to the left */
             align-items: center;
-            padding: 20px;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Ensures header stays above other content */
         }
-        .box {
-            background-color: #1a1a1a; /* Dark grey */
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        header img {
+            height: 50px;
+        }
+        .title {
             text-align: center;
-            width: 90%;
-            max-width: 500px;
-        }
-        h1 {
-            margin-bottom: 20px;
-            font-size: 24px;
+            margin-top: 100px; /* Adjust top margin as needed */
+            font-size: 2.5em;
             color: #f0f0f0; /* White */
         }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .description {
+            text-align: center;
+            font-size: 1.2em;
+            color: #f0f0f0;
         }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        #uv-form {
+            display: flex;
+            width: 90%;
+            max-width: 600px; /* Increased max-width for larger search bar */
+        }
+        #uv-address {
+            flex: 1;
+            padding: 15px; /* Increased padding for larger input */
             border: 1px solid #555;
-            border-radius: 4px;
+            border-radius: 4px 0 0 4px;
             font-size: 16px;
             background-color: #333; /* Dark grey */
             color: #c0c0c0;
         }
-        button {
-            width: 100%;
-            padding: 10px;
+        input[type="submit"] {
+            padding: 15px; /* Increased padding for larger button */
             border: none;
             background: linear-gradient(45deg, #003366, #006699); /* Gradient from dark to light blue */
             color: #fff;
-            border-radius: 4px;
+            border-radius: 0 4px 4px 0;
             cursor: pointer;
             font-size: 16px;
             transition: background 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
-        button:hover {
+        input[type="submit"]:hover {
             background: linear-gradient(45deg, #006699, #003366);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        }
+        main {
+            margin-top: 100px; /* Adjust based on header height */
+            flex: 1; /* Takes remaining vertical space */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         footer {
             background-color: #001f4d;
@@ -84,84 +99,64 @@
             text-align: center;
             font-size: 14px;
             color: #777;
+            width: 100%;
         }
         footer a {
             color: #c0c0c0;
             text-decoration: none;
             margin: 0 5px;
         }
-        .settings {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #1a1a1a; /* Dark grey */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            display: none;
-            z-index: 1000;
-        }
-        .settings h2 {
-            margin-top: 0;
-            color: #f0f0f0; /* White */
-        }
-        .settings-close {
-            background: none;
-            border: none;
-            font-size: 20px;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            color: #c0c0c0;
-        }
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            z-index: 500;
-        }
     </style>
+    <!-- UV scripts -->
+    <script src="baremux/bare.cjs" defer></script>
+    <script src="epoxy/index.js" defer></script>
+    <script src="uv/uv.bundle.js" defer></script>
+    <script src="uv/uv.config.js" defer></script>
 </head>
 <body>
-    <div class="navbar">
-        <a href="#">Home</a>
-        <a href="#">Features</a>
-        <a href="#" onclick="openSettings()">Settings</a>
-    </div>
-    <div class="container">
-        <div class="box">
-            <h1>Pulsar Web Proxy</h1>
-            <form action="/proxy" method="GET">
-                <input type="text" name="url" placeholder="Enter URL" required>
-                <button type="submit">Launch</button>
+    <header>
+        <img src="favicon.ico" alt="Pulsar Logo">
+    </header>
+    <main>
+        <h1 class="title">Pulsar</h1>
+        <p class="description">Your free, fast, and secure web proxy solution</p>
+        <div class="search-container">
+            <form id="uv-form" class="flex-center" action="/uv/service/" method="GET">
+                <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden">
+                <input id="uv-address" name="url" type="text" placeholder="Search with Pulsar" required>
+                <input type="submit" value="Go">
             </form>
         </div>
-    </div>
+    </main>
     <footer>
-        <p>Powered by Ultraviolet v3.0+</p>
-        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+        <div>
+            <a href="https://discord.gg/">Discord</a>
+            <a href="https://github.com/">GitHub</a>
+        </div>
+        <div>Pulsar &copy; 2024</div>
     </footer>
-    <div class="overlay" id="overlay" onclick="closeSettings()"></div>
-    <div class="settings" id="settings">
-        <button class="settings-close" onclick="closeSettings()">✖</button>
-        <h2>Settings</h2>
-        <p>Configure your proxy settings here.</p>
-        <!-- Add your settings form elements here -->
-    </div>
+
+    <!-- JavaScript for UV form handling -->
     <script>
-        function openSettings() {
-            document.getElementById('settings').style.display = 'block';
-            document.getElementById('overlay').style.display = 'block';
-        }
-        function closeSettings() {
-            document.getElementById('settings').style.display = 'none';
-            document.getElementById('overlay').style.display = 'none';
+        document.getElementById("uv-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var searchText = document.getElementById("uv-address").value;
+            if (isValidURL(searchText)) {
+                window.location.href = "/uv/service/" + __uv$config.encodeUrl(searchText);
+            } else {
+                var searchEngine = document.getElementById("uv-search-engine").value;
+                var searchUrl = searchEngine.replace("%s", encodeURIComponent(searchText));
+                window.location.href = "/uv/service/" + __uv$config.encodeUrl(searchUrl);
+            }
+        });
+
+        function isValidURL(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
         }
     </script>
 </body>
