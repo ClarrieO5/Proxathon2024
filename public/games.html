@@ -5,12 +5,12 @@
     <meta name="referrer" content="no-referrer">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pulsar: Your free, fast, and secure web proxy solution.">
-    <meta name="keywords" content="proxy, web proxy, pulsar, unblock websites, free web proxy, proxy server">
+    <meta name="description" content="Pulsar Games: A selection of fun and engaging games.">
+    <meta name="keywords" content="games, web games, free games, online games, pulsar">
     <meta name="theme-color" content="#222831">
     <meta name="googlebot" content="index, follow, snippet">
     <meta name="robots" content="index, follow">
-    <title>Pulsar - Free Frontend Proxy</title>
+    <title>Pulsar - Games</title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -70,51 +70,42 @@
             font-size: 2.5em;
             color: #f0f0f0;
         }
-        .description {
-            text-align: center;
-            font-size: 1.2em;
-            color: #f0f0f0;
-        }
-        .search-container {
+        .game-list {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             margin-top: 20px;
         }
-        #uv-form {
-            display: flex;
-            width: 90%;
-            max-width: 600px;
-        }
-        #uv-address {
-            flex: 1;
-            padding: 15px;
-            border: 1px solid #555;
-            border-radius: 4px 0 0 4px;
-            font-size: 16px;
+        .game-item {
             background-color: #333;
-            color: #c0c0c0;
-        }
-        input[type="submit"] {
-            padding: 15px;
-            border: none;
-            background: linear-gradient(45deg, #003366, #006699);
-            color: #fff;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s, box-shadow 0.3s;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 200px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
-        input[type="submit"]:hover {
+        .game-item h3 {
+            color: #f0f0f0;
+            font-size: 1.2em;
+        }
+        .game-item p {
+            color: #c0c0c0;
+            font-size: 0.9em;
+        }
+        .game-item a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: linear-gradient(45deg, #003366, #006699);
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .game-item a:hover {
             background: linear-gradient(45deg, #006699, #003366);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-        }
-        main {
-            margin-top: 100px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
         footer {
             background-color: #001f4d;
@@ -130,15 +121,12 @@
             margin: 0 5px;
         }
     </style>
-    <script src="/baremux/bare.cjs"></script>
-    <script src="/epoxy/index.js" ></script>
-    <script src="/uv/uv.bundle.js" ></script>
-    <script src="/uv/uv.config.js" ></script>
 </head>
 <body>
     <header>
         <img src="favicon.ico" alt="Pulsar Logo">
         <nav>
+            <a href="index.html"><i class="fas fa-home"></i>Home</a>
             <a href="games.html"><i class="fas fa-gamepad"></i>Games</a>
             <a href="apps.html"><i class="fas fa-mobile-alt"></i>Apps</a>
             <a href="settings.html"><i class="fas fa-cog"></i>Settings</a>
@@ -146,14 +134,23 @@
         </nav>
     </header>
     <main>
-        <h1 class="title">Pulsar</h1>
-        <p class="description">Your free, fast, and secure web proxy solution</p>
-        <div class="search-container">
-            <form id="uv-form" class="flex-center" action="/uv/service/" method="GET">
-                <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden">
-                <input id="uv-address" name="url" type="text" placeholder="Search with Pulsar" required>
-                <input type="submit" value="Go">
-            </form>
+        <h1 class="title">Games</h1>
+        <div class="game-list">
+            <div class="game-item">
+                <h3>Game 1</h3>
+                <p>A fun and engaging game to pass the time.</p>
+                <a href="#">Play Now</a>
+            </div>
+            <div class="game-item">
+                <h3>Game 2</h3>
+                <p>Another exciting game to enjoy.</p>
+                <a href="#">Play Now</a>
+            </div>
+            <div class="game-item">
+                <h3>Game 3</h3>
+                <p>Test your skills with this challenging game.</p>
+                <a href="#">Play Now</a>
+            </div>
         </div>
     </main>
     <footer>
@@ -164,5 +161,4 @@
         <div>Pulsar &copy; 2024</div>
     </footer>
 </body>
-<script src="/register.js"></script>
 </html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pulsar Settings: Customize your preferences.">
+    <meta name="keywords" content="settings, preferences, customization, pulsar">
+    <meta name="theme-color" content="#222831">
+    <meta name="googlebot" content="index, follow, snippet">
+    <meta name="robots" content="index, follow">
+    <title>Pulsar - Settings</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0e0e1a;
+            color: #c0c0c0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.light-mode {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        header {
+            background-color: #001f4d;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        header img {
+            height: 50px;
+            position: absolute;
+            left: 15px;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-size: 1em;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: background 0.3s, color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        nav a i {
+            margin-right: 8px;
+        }
+        nav a:hover {
+            background-color: #003366;
+            color: #fff;
+        }
+        .title {
+            text-align: center;
+            margin-top: 100px;
+            font-size: 2.5em;
+            color: #f0f0f0;
+        }
+        .setting-list {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .setting-item {
+            background-color: #333;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+        .setting-item h3 {
+            color: #f0f0f0;
+            font-size: 1.5em;
+        }
+        .setting-item p {
+            color: #c0c0c0;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+        .setting-item button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #003366, #006699);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .setting-item button:hover {
+            background: linear-gradient(45deg, #006699, #003366);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        }
+        footer {
+            background-color: #001f4d;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            width: 100%;
+        }
+        footer a {
+            color: #c0c0c0;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="favicon.ico" alt="Pulsar Logo">
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i>Home</a>
+            <a href="games.html"><i class="fas fa-gamepad"></i>Google Docs</a>
+            <a href="apps.html"><i class="fas fa-mobile-alt"></i>Google Drive</a>
+            <a href="settings.html"><i class="fas fa-cog"></i>Kahoot</a>
+            <a href="credits.html"><i class="fas fa-info-circle"></i>Blooket</a>
+        </nav>
+    </header>
+    <main>
+        <h1 class="title">Settings</h1>
+        <div class="setting-list">
+            <div class="setting-item">
+                <h3>Google Docs</h3>
+                <p>Manage and create documents online.</p>
+                <button onclick="setSetting('Google Docs')">Open Google Docs</button>
+            </div>
+            <div class="setting-item">
+                <h3>Google Drive</h3>
+                <p>Store and access files from any device.</p>
+                <button onclick="setSetting('Google Drive')">Open Google Drive</button>
+            </div>
+            <div class="setting-item">
+                <h3>Kahoot</h3>
+                <p>Create and play learning games.</p>
+                <button onclick="setSetting('Kahoot')">Open Kahoot</button>
+            </div>
+            <div class="setting-item">
+                <h3>Blooket</h3>
+                <p>Engage and educate with interactive games.</p>
+                <button onclick="setSetting('Blooket')">Open Blooket</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div>
+            <a href="https://discord.gg/">Discord</a>
+            <a href="https://github.com/">GitHub</a>
+        </div>
+        <div>Pulsar &copy; 2024</div>
+    </footer>
+
+    <script>
+        // Function to set the setting
+        function setSetting(setting) {
+            switch (setting) {
+                case 'Google Docs':
+                    openApp('https://docs.google.com');
+                    break;
+                case 'Google Drive':
+                    openApp('https://drive.google.com');
+                    break;
+                case 'Kahoot':
+                    openApp('https://kahoot.com');
+                    break;
+                case 'Blooket':
+                    openApp('https://www.blooket.com');
+                    break;
+                default:
+                    console.log('Unknown setting');
+            }
+        }
+
+        // Function to open the app in a new tab
+        function openApp(url) {
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
