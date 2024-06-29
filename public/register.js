@@ -1,4 +1,4 @@
-s"use strict";
+"use strict";
 const form = document.getElementById("uv-form");
 const address = document.getElementById("uv-address");
 const error = document.getElementById("uv-error");
