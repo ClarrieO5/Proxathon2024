@@ -1,65 +1,89 @@
-import express from "express";
-import http from "node:http";
-import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
-import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
-import { baremuxPath } from "@mercuryworkshop/bare-mux";
-import chalk from "chalk";
-import { hostname } from "node:os";
-import cors from "cors";
-import path from "node:path"
-import wisp from "wisp-server-node";
+import express from 'express'
+import basicAuth from 'express-basic-auth'
+import http from 'node:http'
+import { createBareServer } from '@tomphttp/bare-server-node'
+import path from 'node:path'
+import cors from 'cors'
+import config from './config.js'
+const __dirname = process.cwd()
+const server = http.createServer()
+const app = express(server)
+const bareServer = createBareServer('/bare/')
+const PORT = process.env.PORT || 8080
 
-var theme = chalk.hex("#00FF7F");
-var host = chalk.hex("0d52bd");
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cors())
+app.use(express.static(path.join(__dirname, 'static')))
 
-const server = http.createServer();
-const app = express(server);
-const __dirname = process.cwd();
-const PORT = process.env.PORT || 8080;
+// Route to handle 404 errors
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(__dirname, 'static', '404.html'))
+})
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/public"));
-app.use("/uv/", express.static(uvPath));
-app.use("/epoxy/", express.static(epoxyPath));
-app.use("/baremux/", express.static(baremuxPath));
-app.use(cors());
+if (config.routes !== false) {
+  const routes = [
+    { path: '/', file: 'index.html' },
+    { path: '/', file: 'games.html' },
+    { path: '/', file: 'apps.html' },
+    { path: '/', file: 'credits.html' },
+    { path: '/', file: 'error.html' },
+    { path: '/', file: 'settings.html' }
+  ]
 
-app.use((req, res) => {
-    res.status(404);
-    res.sendFile(path.join(process.cwd(), "/public/error.html"));
-});
-
-server.on("request", (req, res) => {
-        app(req, res);
-});
-
-server.on("upgrade", (req, socket, head) => {
-    if (req.url.endsWith("/wisp/")) {
-        wisp.routeRequest(req, socket, head);
-    } else {
-        socket.end();
-    }
-});
-
-server.on("listening", () => {
-  const address = server.address();
-
-  // by default we are listening on 0.0.0.0 (every interface)
-  // we just need to list a few
-  console.log("Listening on:");
-  console.log(`\thttp://localhost:${address.port}`);
-  console.log(`\thttp://${hostname()}:${address.port}`);
-  console.log(
-    `\thttp://${address.family === "IPv6" ? `[${address.address}]` : address.address
-    }:${address.port}`
-  );
-});
-server.listen({ port: PORT });
-process.on("SIGINT", shutdown);
-process.on("SIGTERM", shutdown);
-function shutdown() {
-    console.log(chalk.redBright("Shutting Down SkioProxy..."));
-    server.close();
-    process.exit(0);
+  routes.forEach((route) => {
+    app.get(route.path, (req, res) => {
+      res.sendFile(path.join(__dirname, 'static', route.file))
+    })
+  })
 }
+
+
+const fetchData = async (req, res, next, baseUrls) => {
+  try {
+    const reqTarget = baseUrls.map((baseUrl) => `${baseUrl}/${req.params[0]}`)
+    let data
+    let asset
+
+    for (const target of reqTarget) {
+      asset = await fetch(target)
+      if (asset.ok) {
+        data = await asset.arrayBuffer()
+        break
+      }
+    }
+
+    if (data) {
+      res.end(Buffer.from(data))
+    } else {
+      next()
+    }
+  } catch (error) {
+    console.error('Error fetching:', error)
+    next(error)
+  }
+}
+
+server.on('request', (req, res) => {
+  if (bareServer.shouldRoute(req)) {
+    bareServer.routeRequest(req, res)
+  } else {
+    app(req, res)
+  }
+})
+
+server.on('upgrade', (req, socket, head) => {
+  if (bareServer.shouldRoute(req)) {
+    bareServer.routeUpgrade(req, socket, head)
+  } else {
+    socket.end()
+  }
+})
+
+server.on('listening', () => {
+  console.log(`The site is running at http://localhost:${PORT}`)
+})
+
+server.listen({
+  port: PORT,
+})
