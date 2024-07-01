@@ -16,19 +16,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        html, body {
+            height: 100%;
+            margin: 0;
             font-family: 'Roboto', sans-serif;
             background-color: #0e0e1a;
             color: #c0c0c0;
-            margin: 0;
+        }
+        .wrapper {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        body.light-mode {
-            background-color: #f0f0f0;
-            color: #333;
         }
         header {
             background-color: #001f4d;
@@ -100,8 +98,8 @@
             margin-top: 10px;
         }
         .setting-item button {
-            margin-top: 10px;
-            padding: 10px 20px;
+            margin-top: 0px;
+            padding: 18px 60px;
             background: linear-gradient(45deg, #003366, #006699);
             color: #fff;
             border: none;
@@ -120,6 +118,7 @@
             font-size: 14px;
             color: #777;
             width: 100%;
+            margin-top: auto; /* Ensures footer sticks to the bottom */
         }
         footer a {
             color: #c0c0c0;
@@ -129,74 +128,32 @@
     </style>
 </head>
 <body>
-    <header>
-        <img src="favicon.ico" alt="Pulsar Logo">
-        <nav>
-            <a href="index.html"><i class="fas fa-home"></i>Home</a>
-            <a href="games.html"><i class="fas fa-gamepad"></i>Google Docs</a>
-            <a href="apps.html"><i class="fas fa-mobile-alt"></i>Google Drive</a>
-            <a href="settings.html"><i class="fas fa-cog"></i>Kahoot</a>
-            <a href="credits.html"><i class="fas fa-info-circle"></i>Blooket</a>
-        </nav>
-    </header>
-    <main>
-        <h1 class="title">Settings</h1>
-        <div class="setting-list">
-            <div class="setting-item">
-                <h3>Google Docs</h3>
-                <p>Manage and create documents online.</p>
-                <button onclick="setSetting('Google Docs')">Open Google Docs</button>
+    <div class="wrapper">
+        <header>
+            <img src="favicon.ico" alt="Pulsar Logo">
+            <nav>
+                <a href="index.html"><i class="fas fa-home"></i>Home</a>
+                <a href="games.html"><i class="fas fa-gamepad"></i>Games</a>
+                <a href="settings.html"><i class="fas fa-cog"></i>Settings</a>
+                <a href="credits.html"><i class="fas fa-info-circle"></i>Credits</a>
+            </nav>
+        </header>
+        <main>
+            <h1 class="title">Settings</h1>
+            <div class="setting-list">
+                <div class="setting-item">
+                    <h3>Launch in About:Blank</h3>
+                    <button class="aboutblank" onclick='javascript: (function () {var url = window.location.href; var urlObj = new window.URL(window.location.href); win = window.open(); win.document.body.style.margin = "0"; win.document.body.style.height = "100vh"; var iframe = win.document.createElement("iframe"); iframe.style.border = "none"; iframe.style.width = "100%"; iframe.style.height = "100%"; iframe.style.margin = "0"; iframe.referrerpolicy = "no-referrer"; iframe.allow = "fullscreen"; iframe.src = url.toString(); win.document.body.appendChild(iframe); var script = win.document.createElement("script"); script.src = "https://3kh0.github.io/js/main.js"; win.document.body.appendChild(script); })();'>About:Blank</button>
+                </div>
             </div>
-            <div class="setting-item">
-                <h3>Google Drive</h3>
-                <p>Store and access files from any device.</p>
-                <button onclick="setSetting('Google Drive')">Open Google Drive</button>
+        </main>
+        <footer>
+            <div>
+                <a href="https://discord.gg/">Discord</a>
+                <a href="https://github.com/">GitHub</a>
             </div>
-            <div class="setting-item">
-                <h3>Kahoot</h3>
-                <p>Create and play learning games.</p>
-                <button onclick="setSetting('Kahoot')">Open Kahoot</button>
-            </div>
-            <div class="setting-item">
-                <h3>Blooket</h3>
-                <p>Engage and educate with interactive games.</p>
-                <button onclick="setSetting('Blooket')">Open Blooket</button>
-            </div>
-        </div>
-    </main>
-    <footer>
-        <div>
-            <a href="https://discord.gg/">Discord</a>
-            <a href="https://github.com/">GitHub</a>
-        </div>
-        <div>Pulsar &copy; 2024</div>
-    </footer>
-
-    <script>
-        // Function to set the setting
-        function setSetting(setting) {
-            switch (setting) {
-                case 'Google Docs':
-                    openApp('https://docs.google.com');
-                    break;
-                case 'Google Drive':
-                    openApp('https://drive.google.com');
-                    break;
-                case 'Kahoot':
-                    openApp('https://kahoot.com');
-                    break;
-                case 'Blooket':
-                    openApp('https://www.blooket.com');
-                    break;
-                default:
-                    console.log('Unknown setting');
-            }
-        }
-
-        // Function to open the app in a new tab
-        function openApp(url) {
-            window.open(url, '_blank');
-        }
-    </script>
+            <div>Pulsar &copy; 2024</div>
+        </footer>
+    </div>
 </body>
 </html>

@@ -1,0 +1,81 @@
+/* Reset default margin and padding */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif; /* Use a suitable fallback font */
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333; /* Dark gray text color */
+  }
+  
+  /* Container for the content */
+  .container {
+    max-width: 800px;
+    margin: 50px auto; /* Center content and provide spacing */
+    padding: 20px;
+    background-color: #fff; /* White background for content */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  }
+  
+  /* Logo wrapper */
+  .logo-wrapper {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Title styling */
+  h1 {
+    font-size: 2em;
+    color: #007bff; /* Blue color for titles */
+  }
+  
+  /* Description */
+  .desc {
+    margin-bottom: 20px;
+  }
+  
+  /* Paragraph styles */
+  p {
+    line-height: 1.6;
+  }
+  
+  /* Code block styling */
+  code {
+    font-family: monospace;
+    background-color: #f8f9fa; /* Light gray background for code */
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  
+  /* Button styles */
+  button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue button background */
+    color: #fff; /* White button text */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  /* Footer styling */
+  footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #777; /* Gray text color for footer */
+  }
+  
+  footer a {
+    color: #007bff; /* Blue link color */
+    text-decoration: none;
+    margin-left: 10px;
+  }
+  
+  footer a:hover {
+    text-decoration: underline;
+  }
+  
