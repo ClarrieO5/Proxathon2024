@@ -25,10 +25,8 @@ if (config.routes !== false) {
   const routes = [
     { path: '/', file: 'index.html' },
     { path: '/', file: 'games.html' },
-    { path: '/', file: 'apps.html' },
-    { path: '/', file: 'credits.html' },
-    { path: '/', file: 'error.html' },
-    { path: '/', file: 'settings.html' }
+    { path: '/', file: 'movies.html' },
+    { path: '/', file: 'img' },
   ]
 
   routes.forEach((route) => {
@@ -81,7 +79,7 @@ server.on('upgrade', (req, socket, head) => {
 })
 
 server.on('listening', () => {
-  console.log(`The site is running at http://localhost:${PORT}`)
+  console.log(`Pulsar is running at http://localhost:${PORT}`)
 })
 
 server.listen({
