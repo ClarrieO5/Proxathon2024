@@ -80,6 +80,7 @@ server.on('upgrade', (req, socket, head) => {
 
 server.on('listening', () => {
   console.log(`Pulsar is running at http://localhost:${PORT}`)
+  console.log('Hunting dogs eating rice is best')
 })
 
 server.listen({
